@@ -8,14 +8,41 @@ class BestBooks extends React.Component {
     }
   }
 
-  /* TODO: Make a GET request to your API to fetch all the books from the database  */
+
+  componentDidMount = () => {
+    axios
+    .get(`http://localhost:3000/books`)
+    .then(result =>{
+      console.log(result.data);
+      this.setState({
+        books : result.data
+      })
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+    
+  }
+
 
   render() {
-
-    /* TODO: render all the books in a Carousel */
-
+return(
+    <div>
+    <h1>Books</h1>
+    {this.state.books.map(item =>{
+      return(
+        <div>
+          <h3>Titel : {item.title} </h3>
+          <p> Description: {item.description}</p>
+          <p> Status : {item.status}</p>
+        </div>
+      )
+    })}
+    </div>
+    }}
     return (
       <>
+
         <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
 
         {this.state.books.length ? (
@@ -25,7 +52,7 @@ class BestBooks extends React.Component {
         )}
       </>
     )
-  }
-}
+  
+
 
 export default BestBooks;
