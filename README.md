@@ -29,7 +29,8 @@ hit the link,and have internet
 
 ## Change Log
 
-first change >> 04-09-2022 time 4pm
+first change >> 04-09-2022 time: 4pm
+sec change>> 5-9-2022 time: 11am
 
 ## Estimates
 <!-- See below -->
@@ -46,4 +47,4 @@ Start time:9
 
 Finish time: 12
 
-Actual time needed to complete: 3h and didt know how to make Bootstrap carousel
+Actual time needed to complete: 3h
