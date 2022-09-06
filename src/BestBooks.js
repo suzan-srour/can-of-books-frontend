@@ -1,4 +1,6 @@
 import React from 'react'; 
+import Form  from './Form';
+import Updated from './Updated';
 import Carousel from 'react-bootstrap/Carousel'
 import Button from "react-bootstrap/Button";
 import axios from 'axios';
@@ -6,7 +8,11 @@ class BestBooks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      books: []
+      books: [],
+      show : false,
+      showFlag: false,
+      status: "", 
+      currentBooks : {},
     }
   }
 
@@ -27,13 +33,25 @@ class BestBooks extends React.Component {
   } 
 
 
+  handleShow = () => {
+    this.setState({
+      show: true,
+    });
+  };
+
+  handleClose = () => {
+    this.setState({
+      show: false,
+    });
+  };
+
   addBook = (event) =>{
     event.preventDefault();
 
     const obj = {
       title : event.target.title.value,
       description: event.target.description.value,
-      status :this.state.status,
+      status :event.target.status.value,
      
     };
     console.log(obj);
@@ -64,8 +82,40 @@ class BestBooks extends React.Component {
   };
 
 
+  handleShowUpdate = (item) => {
+    this.setState({
+      showFlag: true,
+      currentBooks : item,
+    });
+  };
 
+  handleCloseUpdate = () => {
+    this.setState({
+      showFlag: false,
+    });
+  };
 
+  updateBook = (event) =>{
+    event.preventDefault();
+    let obj = {
+      title: event.target.title.value,
+      description: event.target.description.value,
+      status : event.target.status.value
+    }
+    console.log(obj)
+    const id = this.state.currentBooks._id;
+    axios
+    .put(`https://localhost:3001/updateBook/${id}`, obj)
+    .then(result=>{
+      this.setState({
+        books : result.data
+      })
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+    this.handleCloseUpdate();
+  }
 
 
 
@@ -79,54 +129,81 @@ class BestBooks extends React.Component {
 
     return (
       <>
-        <h2>My Essential Lifelong Learning  &amp; Formation Shelf</h2>
-           
-        <form onSubmit={this.props.addBook}>
-          <input type="text" name="title" placeholder='title' />
-          <input type="text" name="describtion" placeholder='describtion' />
-          <input type="text" name="status" placeholder='status' />
+      
+        <div>
+        <div id="form">
+          <>
+          <h1>My Essential Lifelong Learning & Formation Shelf</h1>
+          
+            <Button
+              variant="outline-secondary"
+              size="lg"
+              onClick={this.handleShow}
 
-          <button type='submit'>Add a book!</button>
+            >
+              Add Book 
+            </Button>
+          
+            <Form
+              show={this.state.show}
+              handleClose={this.handleClose}
+              addBook={this.addBook}
 
-        </form>
+            />
 
 
+
+
+
+          </>
+        </div>
+        <div id="CarouselDiv">
         {this.state.books.length > 0 ? (
-          <Carousel>
-            {this.state.books.map(item => {
-              return (
+          <><Carousel>
+                {this.state.books.map(item => {
+                  return (
 
-                <Carousel.Item>
-                  <img
-                    className="d-block w-100"
-                    src="https://www.ukrgate.com/eng/wp-content/uploads/2021/02/The-Ukrainian-Book-Institute-Purchases-380.9-Thousand-Books-for-Public-Libraries1.jpeg "
-                    alt="First slide"
-                  />
-                  <Carousel.Caption>
-                    <h3> title {item.title}</h3>
-                    <p>description: {item.description}</p>
-                    <Button variant="light" 
+                    <Carousel.Item>
+                      <img
+                        className="d-block w-100"
+                        src="https://www.ukrgate.com/eng/wp-content/uploads/2021/02/The-Ukrainian-Book-Institute-Purchases-380.9-Thousand-Books-for-Public-Libraries1.jpeg "
+                        alt="First slide" />
+                      <Carousel.Caption>
+                        <h3> title {item.title}</h3>
+                        <p>description: {item.description}</p>
+                        <Button variant="light"
                           onClick={() => this.deleteBook(item._id)}
                         >
                           Delete This Book!
                         </Button>
-                  </Carousel.Caption>
-                </Carousel.Item>
+                        <Button
+                          variant="outline-light"
+                          onClick={() => this.handleShowUpdate(item)}
+                        >
+                          Update This Book!
+                        </Button>
 
-              )
-            }
-            )}
+                      </Carousel.Caption>
+                    </Carousel.Item>
 
-
-          </Carousel>
+                  );
+                })}
+              </Carousel><Updated
+                  show={this.state.showFlag}
+                  handleCloseUpdate={this.handleCloseUpdate}
+                  handleShowUpdate={this.handleShowUpdate}
+                  updateBook={this.updateBook}
+                  currentBooks={this.state.currentBooks} /></>
         ) : (
           <h3>the book collection is empty.</h3>
         )}
 
 
 
+      </div>
+      </div>
       </>
-    )
+    );
   }
 }
 
