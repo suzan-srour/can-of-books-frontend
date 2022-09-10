@@ -4,6 +4,7 @@ import Updated from './Updated';
 import Carousel from 'react-bootstrap/Carousel'
 import Button from "react-bootstrap/Button";
 import axios from 'axios';
+import { withAuth0 } from '@auth0/auth0-react';
 class BestBooks extends React.Component {
   constructor(props) {
     super(props);
@@ -198,4 +199,4 @@ class BestBooks extends React.Component {
   }
 }
 
-export default BestBooks;
+export default withAuth0(BestBooks);

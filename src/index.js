@@ -1,15 +1,15 @@
-// import React from 'react';
-// import { useAuth0 } from '@auth0/auth0-react';
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import { Auth0Provider } from "@auth0/auth0-react";
 
-// // function LoginButton() {
-// //   const {
-// //     isAuthenticated,
-// //     loginWithRedirect,
-// //   } = useAuth0();
-
-// //   return !isAuthenticated && (
-// //     <button onClick={loginWithRedirect}>Log in</button>
-// //   );
-// // }
-
-// export default LoginButton;
+ReactDOM.render(
+  <Auth0Provider
+    domain="dev-5rh8l4qs.us.auth0.com"
+    clientId="4cuuAECn5w6NEYNWKmovGCvOrUpvjxEv"
+    redirectUri={window.location.origin}
+  >
+    <App />
+  </Auth0Provider>,
+  document.getElementById("root")
+);
