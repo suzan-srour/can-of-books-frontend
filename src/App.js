@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import BestBooks from './BestBooks';
-import Profile from './profile';
+//import profile from './profile';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   BrowserRouter as Router,
@@ -13,6 +13,8 @@ import {
 
 class App extends React.Component {
   render() {
+    
+
     return (
       <>
         <Router>
@@ -20,11 +22,15 @@ class App extends React.Component {
           <Routes>
             <Route 
               exact path="/"
-              element={<BestBooks />}
+              element={<BestBooks />} 
             >
             </Route>
-            { <Profile/>}
-          </Routes>
+            <Route 
+              exact path="/profile"
+              element={<profile/>} 
+            >
+              </Route>
+           </Routes>
           <Footer />
         </Router>
       </>

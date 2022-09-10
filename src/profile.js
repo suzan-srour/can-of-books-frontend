@@ -1,12 +1,11 @@
-import React from "react";
-class Profile extends React.Component {
-  
-  render() {
-    return (
-        <p> My name is suzan srour,love codig and data since  </p>
-      
-    )
-  }
-}
+// import React, { Component } from 'react';
+// //import { withAuth0 } from '@auth0/auth0-react';
 
-export default Profile;
+// class Profile extends Component {
+// //   render() {
+// //     const { user } = this.props.auth0;
+// //     return <div>Hello {user.name}</div>;
+// //   }
+// // }
+
+// export default Profile;

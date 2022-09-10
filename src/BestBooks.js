@@ -20,7 +20,7 @@ class BestBooks extends React.Component {
   /* TODO: Make a GET request to your API to fetch all the books from the database  */
   componentDidMount = () => {
     axios
-      .get("http://localhost:3001/books")
+      .get("https://server-book-suzan.herokuapp.com/books")
       .then(result => {
         console.log(result.data);
         this.setState({
@@ -56,7 +56,7 @@ class BestBooks extends React.Component {
     };
     console.log(obj);
     axios
-    .post(`http://localhost:3001/addbook`, obj)
+    .post(`https://server-book-suzan.herokuapp.com/books`, obj)
     .then(result =>{
       this.setState({
         books : result.data
@@ -69,7 +69,7 @@ class BestBooks extends React.Component {
 
   deleteBook = (id) => {
     axios
-      .delete(`https://localhost:3001/deleteBook${id}`)
+      .delete(`https://server-book-suzan.herokuapp.com//books/${id}`)
       .then((result) => {
         this.setState({
           books: result.data,
@@ -105,7 +105,7 @@ class BestBooks extends React.Component {
     console.log(obj)
     const id = this.state.currentBooks._id;
     axios
-    .put(`https://localhost:3001/updateBook/${id}`, obj)
+    .put(`https://server-book-suzan.herokuapp.com/books/${id}`, obj)
     .then(result=>{
       this.setState({
         books : result.data
@@ -116,10 +116,6 @@ class BestBooks extends React.Component {
     })
     this.handleCloseUpdate();
   }
-
-
-
-
 
 
 
@@ -150,11 +146,6 @@ class BestBooks extends React.Component {
               addBook={this.addBook}
 
             />
-
-
-
-
-
           </>
         </div>
         <div id="CarouselDiv">
@@ -169,8 +160,8 @@ class BestBooks extends React.Component {
                         src="https://www.ukrgate.com/eng/wp-content/uploads/2021/02/The-Ukrainian-Book-Institute-Purchases-380.9-Thousand-Books-for-Public-Libraries1.jpeg "
                         alt="First slide" />
                       <Carousel.Caption>
-                        <h3> title {item.title}</h3>
-                        <p>description: {item.description}</p>
+                        <h3>  {item.title}</h3>
+                        <p>{item.description}</p>
                         <Button variant="light"
                           onClick={() => this.deleteBook(item._id)}
                         >

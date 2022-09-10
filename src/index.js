@@ -1,10 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
+// import React from 'react';
+// import { useAuth0 } from '@auth0/auth0-react';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+// // function LoginButton() {
+// //   const {
+// //     isAuthenticated,
+// //     loginWithRedirect,
+// //   } = useAuth0();
+
+// //   return !isAuthenticated && (
+// //     <button onClick={loginWithRedirect}>Log in</button>
+// //   );
+// // }
+
+// export default LoginButton;
